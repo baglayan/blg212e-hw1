@@ -34,8 +34,8 @@ case0	MOVS R0, #1						;set result as 1
 case1	BX LR							;return from subroutine
 
 		
-base	EQU	0x00000002					;give symbolic name "num" to numeric constant
-power	EQU	0x0000000a					;ditto
+base	EQU	0x00000002					;give symbolic name "base" to numeric constant
+power	EQU	0x0000000a					;ditto, name "power"
 
 		ENDFUNC							;declare function end
 		END								;declare the end of code
