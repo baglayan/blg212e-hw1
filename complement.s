@@ -9,6 +9,8 @@ __main	FUNCTION						;mark the start of a function
 		MOVS R0, num					;move the value of num into R1
 		MVNS R1, R0						;move the negated contents of R0 into R1
 		
+        BX LR                           ;return
+        
 num		EQU	0x00000008					;give symbolic name "num" to numeric constant
 		
 		ENDFUNC							;declare the end of function
