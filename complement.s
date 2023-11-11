@@ -1,3 +1,13 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;		Meriç Bağlayan
+;		150190056
+;		BLG 212E Microprocessor Systems
+;		Homework 1
+;		ARM Cortex M0+ assembly code that
+;			takes the complement
+;			of a number.
+;		Submitted on 2023-11-11
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 		THUMB							;instruct the assembler to interpret following code as thumb instructions
 		AREA complement, CODE, READONLY ;declare new area
 		

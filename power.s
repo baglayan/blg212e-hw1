@@ -1,3 +1,14 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;		Meriç Baglayan
+;		150190056
+;		BLG 212E Microprocessor Systems
+;		Homework 1
+;		ARM Cortex M0+ assembly code that
+;			takes the power of a number
+;			recursively.
+;		Submitted on 2023-11-11
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 		THUMB							;instruct the assembler to interpret following code as thumb instructions
 		AREA raise_area, CODE, READONLY ;declare new area
 		
@@ -25,7 +36,7 @@ raise	FUNCTION						;declare function start
 		CMP R1, #0						;check if remaining power is 0
 		BEQ case0						;branch to necessary subroutine if so
 		SUBS R1, R1, #1					;substract 1 from remaining power
-		PUSH {R0}						;push 
+		PUSH {R0}						;push R0 (currently holding the base number) into the stack
 		
 		BL	raise						;branch to raise subroutine
 		
