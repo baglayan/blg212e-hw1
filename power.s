@@ -5,33 +5,36 @@
 		ALIGN							;align code within appropriate boundaries		
 		ENTRY							;declare as entry point
 		EXPORT __main					;declare __main symbol to be used by linker
-		
+
+										;this code is not actually recursive. how do i make it recursive while utilizing stack?
 __main 	FUNCTION						;declare function start
+		PUSH {LR}						;push link register into the stack
 		LDR R0, =base 					;R0 holds interim (and final) result
-		LDR R1, =base					;R1 holds base for the power operation
-		LDR R2, =power					;R2 holds the initial and remaining power 
+		LDR R1, =power					;R1 holds the initial and remaining power 
 						
 		BL raise						;linked branch to raise subroutine
-		NOP								;no operation to signify program end
+		B	.							;infinite loop to signify program end
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;after execution:
+		;expected value of R0=0x00000400 (2^10 in hex)
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 		ENDFUNC							;declare function end
 		
 raise	FUNCTION						;declare function start
-		CMP R2, #0						;check if remaining power is 0
-		BEQ case0						;branch to necessary subroutne if so
+		PUSH {LR}						;push link register into stack
+		CMP R1, #0						;check if remaining power is 0
+		BEQ case0						;branch to necessary subroutine if so
+		SUBS R1, R1, #1					;substract 1 from remaining power
+		PUSH {R0}						;push 
 		
-		CMP R2, #1						;check if remaining power is 1
-		BEQ case1						;branch to necessary subroutine if so
+		BL	raise						;branch to raise subroutine
 		
-		SUBS R2, R2, #1					;substract 1 from remaining power
-		MULS R0, R1, R0					;multiply the current result with base and store it as the new current result
-		B	raise						;branch to raise subroutine
-		
-		BX LR							;return from subroutine
+		POP {R2}						;pop the stack (currently holding the base number) into R2 for multiplication
+		MULS R0, R2, R0					;multiply the current result with base and store it as the new current result
+		POP {PC}						;pop previously saved LR into PC
 		
 case0	MOVS R0, #1						;set result as 1
-		BX LR							;return from subroutine
-
-case1	BX LR							;return from subroutine
+		POP {PC}						;pop previously saved LR into PC
 
 		
 base	EQU	0x00000002					;give symbolic name "base" to numeric constant
