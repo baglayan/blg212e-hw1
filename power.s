@@ -7,12 +7,12 @@
 		EXPORT __main					;declare __main symbol to be used by linker
 		
 __main 	FUNCTION						;declare function start
-		MOVS R0, #base 					;R0 holds interim (and final) result
-		MOVS R1, #base					;R1 holds base for the power operation
-		MOVS R2, #power					;R2 holds the initial and remaining power 
+		LDR R0, =base 					;R0 holds interim (and final) result
+		LDR R1, =base					;R1 holds base for the power operation
+		LDR R2, =power					;R2 holds the initial and remaining power 
 						
 		BL raise						;linked branch to raise subroutine
-		BX LR							;in this case, return
+		NOP								;no operation to signify program end
 		ENDFUNC							;declare function end
 		
 raise	FUNCTION						;declare function start
