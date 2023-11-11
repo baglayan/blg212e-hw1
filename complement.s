@@ -10,7 +10,7 @@ __main	FUNCTION						;mark the start of a function
 		
 		LDR R0, =num					;move the value of num into R1
 		MVNS R1, R0						;move the negated contents of R0 into R1
-		NOP								;no operation to signify program end
+		B	.							;infinite loop to signify program end
 		
 		ENDFUNC							;declare the end of function
 	
