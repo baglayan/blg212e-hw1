@@ -17,7 +17,7 @@
 		ENTRY							;declare as entry point
 		EXPORT __main					;declare __main symbol to be used by linker
 
-										;this code is not actually recursive. how do i make it recursive while utilizing stack?
+										
 __main 	FUNCTION						;declare function start
 		PUSH {LR}						;push link register into the stack
 		LDR R0, =base 					;R0 holds interim (and final) result
