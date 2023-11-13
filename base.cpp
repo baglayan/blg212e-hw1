@@ -11,8 +11,6 @@ int raise(int num, unsigned int pow) {
     switch(pow) {
         case 0:
             return 1;
-        case 1:
-            return num;
         default:
             return num * raise(num, pow - 1);
     }
